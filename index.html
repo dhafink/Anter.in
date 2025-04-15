@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pencarian Kode Pos Indonesia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    h2 {
+      color: #d32f2f;
+    }
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-container select,
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .form-container button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .form-container button:hover {
+      background-color: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 4px;
+      display: none;
+    }
+    .result.success {
+      background-color: #e8f5e9; /* Hijau */
+      color: #388e3c;
+    }
+    .result.error {
+      background-color: #f8d7da; /* Merah */
+      color: #d32f2f;
+    }
+    .result p {
+      font-size: 16px;
+    }
+  </style>
+  <script>
+    // Fungsi untuk memverifikasi kode pos setelah form disubmit
+    function validateForm(event) {
+      event.preventDefault(); // Mencegah halaman ter-reload
+
+      // Mengambil data input dari form
+      var nama = document.getElementById("nama").value;
+      var nrp = document.getElementById("nrp").value;
+      var email = document.getElementById("email").value;
+      var mataKuliah = document.getElementById("mata_kuliah").value;
+      var dosen = document.getElementById("dosen").value;
+      var provinsi = document.getElementById("provinsi").value;
+      var kota = document.getElementById("kota").value;
+      var kecamatan = document.getElementById("kecamatan").value;
+      var kodePos = document.getElementById("kodePos").value;
+
+      // Validasi form
+      if (email == "" || isNaN(nrp) || nrp == "") {
+        alert("Pastikan semua data valid. NRP harus diisi dengan angka dan email tidak boleh kosong.");
+        return false;
+      }
+
+      // Simulasi verifikasi kode pos berdasarkan inputan
+      var isKodePosValid = false;
+      var message = "";
+      var resultClass = "";
+
+      // Verifikasi kode pos untuk Sukolilo dan Mulyorejo
+      if (provinsi == "Jawa Timur" && kota == "Surabaya") {
+        if (kecamatan == "Sukolilo" && kodePos == "60111") {
+          isKodePosValid = true;
+          message = "Kode Pos: 60111 ditemukan untuk daerah Sukolilo, Surabaya, Jawa Timur.";
+          resultClass = "success";
+        } else if (kecamatan == "Mulyorejo" && kodePos == "60114") {
+          isKodePosValid = true;
+          message = "Kode Pos: 60114 ditemukan untuk daerah Mulyorejo, Surabaya, Jawa Timur.";
+          resultClass = "success";
+        } else {
+          isKodePosValid = false;
+          message = "Kode Pos tidak ditemukan atau data yang dimasukkan tidak sesuai.";
+          resultClass = "error";
+        }
+      } else {
+        isKodePosValid = false;
+        message = "Kode Pos tidak ditemukan atau data yang dimasukkan tidak sesuai.";
+        resultClass = "error";
+      }
+
+      // Menampilkan hasil verifikasi dengan warna hijau/merah
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").className = "result " + resultClass;
+      document.getElementById("result").innerHTML = "<strong>Hasil Verifikasi:</strong> " + message;
+      return false;
+    }
+  </script>
+</head>
+<body>
+
+  <h2>Form Pengiriman</h2>
+
+  <!-- Form Pengiriman -->
+  <div class="form-container">
+    <form onsubmit="return validateForm(event)">
+      <label for="nama">Nama Mahasiswa:</label>
+      <input type="text" id="nama" name="nama" required><br><br>
+
+      <label for="nrp">NRP:</label>
+      <input type="number" id="nrp" name="nrp" required><br><br>
+
+      <label for="email">Email Pengirim:</label>
+      <input type="email" id="email" name="email" placeholder="Email Aktif" required><br><br>
+
+      <label for="mata_kuliah">Mata Kuliah:</label>
+      <input type="text" id="mata_kuliah" name="mata_kuliah" required><br><br>
+
+      <label for="dosen">Dosen:</label>
+      <input type="text" id="dosen" name="dosen" required><br><br>
+
+      <label for="provinsi">Provinsi:</label>
+      <select id="provinsi" required>
+        <option value="">Pilih Provinsi</option>
+        <option value="Jawa Timur">Jawa Timur</option>
+        <option value="Jawa Barat">Jawa Barat</option>
+      </select><br><br>
+
+      <label for="kota">Kota/Kabupaten:</label>
+      <select id="kota" required>
+        <option value="">Pilih Kota</option>
+        <option value="Surabaya">Surabaya</option>
+        <option value="Malang">Malang</option>
+      </select><br><br>
+
+      <label for="kecamatan">Kecamatan:</label>
+      <select id="kecamatan" required>
+        <option value="">Pilih Kecamatan</option>
+        <option value="Sukolilo">Sukolilo</option>
+        <option value="Mulyorejo">Mulyorejo</option>
+      </select><br><br>
+
+      <label for="kodePos">Kode Pos:</label>
+      <input type="text" id="kodePos" placeholder="Masukkan Kode Pos" required><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Hasil Verifikasi Kode Pos -->
+  <div id="result" class="result" style="display: none;">
+    <!-- Hasil verifikasi akan ditampilkan di sini -->
+  </div>
+
+</body>
+</html>
