@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anter.in - Pencarian Kode Pos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1>Anter.in</h1>
+    <p>Solusi Pengiriman Cepat dan Tepat</p>
+  </header>
+
+  <!-- Form Pengiriman -->
+  <h2>Form Pengiriman</h2>
+  <div class="form-container">
+    <form onsubmit="return validateForm(event)">
+      <label for="nama">Nama Mahasiswa:</label>
+      <input type="text" id="nama" name="nama" required><br><br>
+
+      <label for="nrp">NRP:</label>
+      <input type="number" id="nrp" name="nrp" required><br><br>
+
+      <label for="email">Email Pengirim:</label>
+      <input type="email" id="email" name="email" placeholder="Email Aktif" required><br><br>
+
+      <label for="mata_kuliah">Mata Kuliah:</label>
+      <input type="text" id="mata_kuliah" name="mata_kuliah" required><br><br>
+
+      <label for="dosen">Dosen:</label>
+      <input type="text" id="dosen" name="dosen" required><br><br>
+
+      <label for="provinsi">Provinsi:</label>
+      <select id="provinsi" required>
+        <option value="">Pilih Provinsi</option>
+        <option value="Jawa Timur">Jawa Timur</option>
+        <option value="Jawa Barat">Jawa Barat</option>
+      </select><br><br>
+
+      <label for="kota">Kota/Kabupaten:</label>
+      <select id="kota" required>
+        <option value="">Pilih Kota</option>
+      </select><br><br>
+
+      <label for="kecamatan">Kecamatan:</label>
+      <select id="kecamatan" required>
+        <option value="">Pilih Kecamatan</option>
+      </select><br><br>
+
+      <label for="kodePos">Kode Pos:</label>
+      <input type="text" id="kodePos" placeholder="Masukkan Kode Pos" readonly><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Hasil Verifikasi Kode Pos -->
+  <div id="result" class="result" style="display: none;">
+    <!-- Hasil verifikasi akan ditampilkan di sini -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
